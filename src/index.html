@@ -14,22 +14,27 @@
     <title>Forecast</title>
   </head>
   <body class="d-flex justify-content-center align-items-center min-vh-100">
-    <div class="card" style="width: 500px">
-      <div class="card-body">
-        <h5 class="card-title" id="location">Location Here</h5>
-        <p class="card-text" id="date-time">Current date and time here.</p>
+    <div class="container-lg">
+      <div class="row justify-content-center align-items-center gap-5">
+        <div class="col-5">
+          <h1>
+            <div class="display-4 mb-3" id="description-display">Description</div>
+            <div class="display-5" id="temperature-display">Temperature</div>
+          </h1>
+
+          <p id="location-display">Location</p>
+          <p id="feels-like-display">Feels Like</p>
+          <p id="humidity-display">Humidity</p>
+          <p id="wind-display">Wind Speed</p>
+          <p id="date-display">Date</p>
+
+          <input type="text" class="form-control" id="location-input" placeholder="Enter location here." />
+        </div>
+
+        <div class="col-5">
+          <img class="img-fluid rounded" src="./images/placeholder.jpg" />
+        </div>
       </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item" id="temperature">Temperature</li>
-        <li class="list-group-item" id="description">Description</li>
-        <li class="list-group-item" id="info">Other Info</li>
-        <li class="list-group-item">
-          <div class="input-group">
-            <span class="input-group-text"><i class="bi bi-slash-square"></i></span>
-            <input type="text" class="form-control" id="search" placeholder="Enter location here." />
-          </div>
-        </li>
-      </ul>
     </div>
   </body>
 </html>

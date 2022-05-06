@@ -1,35 +1,78 @@
 import * as bootstrap from "bootstrap";
 
 // Variables
-const location = document.getElementById("location");
-const dateTime = document.getElementById("date-time");
-const temperature = document.getElementById("temperature");
-const description = document.getElementById("description");
-const info = document.getElementById("info");
+const locationDisplay = document.getElementById("location-display");
+const temperatureDisplay = document.getElementById("temperature-display");
+const descriptionDisplay = document.getElementById("description-display");
+const feelsLikeDisplay = document.getElementById("feels-like-display");
+const humidityDisplay = document.getElementById("humidity-display");
+const windDisplay = document.getElementById("wind-display");
+const dateDisplay = document.getElementById("date-display");
 
-// Public API Keys
+const locationInput = document.getElementById("location-input");
+const locationSearch = new google.maps.places.SearchBox(locationInput);
+
+let isFahrenheit = true;
+let isMiles = true;
+
+// Public API Key
 const openWeatherAPI = "f79262b8943c9a96eeefe553bb0bdb63";
-let city = "Mcallen";
 
-async function getWeather() {
-  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${openWeatherAPI}&units=imperial`);
-  const weatherData = await response.json();
-  console.log(weatherData);
+// Functions
+locationSearch.addListener("places_changed", () => {
+  const location = locationSearch.getPlaces()[0];
+  if (location === null) return;
 
-  location.textContent = weatherData.name;
-  temperature.textContent = `${weatherData.main.temp} \u00b0F`;
-  description.textContent = weatherData.weather[0].description;
+  const latitude = location.geometry.location.lat();
+  const longitude = location.geometry.location.lng();
+
+  setWeatherData(latitude, longitude).catch((error) => alert(error));
+});
+
+function updateUsingGeolocation() {
+  navigator.geolocation.getCurrentPosition((location) => {
+    if (location === null) return;
+    const latitude = location.coords.latitude;
+    const longitude = location.coords.longitude;
+
+    setWeatherData(latitude, longitude).catch((error) => alert(error));
+  });
 }
 
-getWeather().catch((error) => alert(error));
+async function setWeatherData(latitude, longitude) {
+  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&&appid=${openWeatherAPI}`);
+  const weatherData = await response.json();
 
-const searchElement = document.getElementById("search");
-const searchBox = new google.maps.places.SearchBox(searchElement);
+  const temperature = weatherData.main.temp;
+  const convertedTemperature = isFahrenheit ? `${convertToFahrenheit(temperature)} \u00b0F` : `${convertToCelcius(temperature)} \u00b0C`;
+  const feelsLike = weatherData.main.feels_like;
+  const convertedfeelsLike = isFahrenheit ? `${convertToFahrenheit(feelsLike)} \u00b0F` : `${convertToCelcius(feelsLike)} \u00b0C`;
+  const wind = weatherData.wind.speed;
+  const convertedWind = isMiles ? `${convertToMiles(wind)} mph` : `${convertToKilometers(wind)} km/h`;
 
-searchBox.addListener("places_changed", () => {
-  const place = searchBox.getPlaces()[0];
-  if (place === null) return;
+  locationDisplay.textContent = `${weatherData.name}, ${weatherData.sys.country}`;
+  temperatureDisplay.textContent = convertedTemperature;
+  descriptionDisplay.textContent = weatherData.weather[0].main;
+  feelsLikeDisplay.textContent = `Feels Like: ${convertedfeelsLike}`;
+  humidityDisplay.textContent = `Humidity: ${weatherData.main.humidity}`;
+  windDisplay.textContent = convertedWind;
+}
 
-  const latitude = place.geometry.location.lat();
-  const longitude = place.geometry.location.lng();
-});
+function convertToFahrenheit(temperature) {
+  return Math.round((temperature - 273.15) * (9 / 5) + 32);
+}
+
+function convertToCelcius(temperature) {
+  return Math.round(temperature - 273.15);
+}
+
+function convertToMiles(wind) {
+  return Math.round(wind * 2.237);
+}
+
+function convertToKilometers(wind) {
+  return Math.round(wind * 3.6);
+}
+
+// On Page Load
+updateUsingGeolocation();
