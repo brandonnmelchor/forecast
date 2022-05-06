@@ -84,8 +84,10 @@ updateUsingGeolocation();
 
 // Work in Progress
 function setWeatherImage(description) {
-  if (description === "Clear") return;
+  if (description === "Clear") weatherImage.src = "#";
+  else if (description === "Clouds") weatherImage.src = "#";
+  else if (description === "Rain" || description === "Drizzle") weatherImage.src = "#";
+  else if (description === "Snow") weatherImage.src = "#";
+  else if (description === "Thunderstorm") weatherImage.src = "#";
+  else weatherImage.src = "#";
 }
-
-weatherImage.src = "./images/rain.png";
-console.log(weatherImage);
