@@ -19,7 +19,7 @@ let isMiles = true;
 // Public API Key
 const openWeatherAPI = "f79262b8943c9a96eeefe553bb0bdb63";
 
-// Functions
+// Location Functions
 locationSearch.addListener("places_changed", () => {
   const location = locationSearch.getPlaces()[0];
   if (location === null) return;
@@ -40,6 +40,7 @@ function updateUsingGeolocation() {
   });
 }
 
+// Weather Functions
 async function setWeatherData(latitude, longitude) {
   const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&&appid=${openWeatherAPI}`);
   const weatherData = await response.json();
@@ -60,9 +61,20 @@ async function setWeatherData(latitude, longitude) {
   humidityDisplay.textContent = `Humidity: ${weatherData.main.humidity}`;
   windDisplay.textContent = convertedWind;
 
+  setWeatherImage(description);
   console.log(weatherData);
 }
 
+function setWeatherImage(description) {
+  if (description === "Clear") weatherImage.src = require("../images/clear.png");
+  else if (description === "Clouds") weatherImage.src = require("../images/clouds.png");
+  else if (description === "Rain" || description === "Drizzle") weatherImage.src = require("../images/rain.png");
+  else if (description === "Snow") weatherImage.src = require("../images/snow.png");
+  else if (description === "Thunderstorm") weatherImage.src = require("../images/thunderstorm.png");
+  else weatherImage.src = require("../images/atmosphere.png");
+}
+
+// Conversion Functions
 function convertToFahrenheit(temperature) {
   return Math.round((temperature - 273.15) * (9 / 5) + 32);
 }
@@ -83,11 +95,3 @@ function convertToKilometers(wind) {
 updateUsingGeolocation();
 
 // Work in Progress
-function setWeatherImage(description) {
-  if (description === "Clear") weatherImage.src = "#";
-  else if (description === "Clouds") weatherImage.src = "#";
-  else if (description === "Rain" || description === "Drizzle") weatherImage.src = "#";
-  else if (description === "Snow") weatherImage.src = "#";
-  else if (description === "Thunderstorm") weatherImage.src = "#";
-  else weatherImage.src = "#";
-}
