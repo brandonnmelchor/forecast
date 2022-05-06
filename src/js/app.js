@@ -63,6 +63,7 @@ async function setWeatherData(latitude, longitude) {
   windDisplay.textContent = convertedWind;
   dateDisplay.textContent = getLocalDate(weatherData.timezone);
   timeDisplay.textContent = getLocalTime(weatherData.timezone);
+
   setWeatherImage(description);
 }
 
@@ -113,5 +114,3 @@ function convertToKilometers(wind) {
 
 // On Page Load
 updateUsingGeolocation();
-
-// Work in Progress
