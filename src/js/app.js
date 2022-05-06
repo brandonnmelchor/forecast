@@ -1,9 +1,9 @@
 import * as bootstrap from "bootstrap";
 
 // Variables
-const locationDisplay = document.getElementById("location-display");
-const temperatureDisplay = document.getElementById("temperature-display");
 const descriptionDisplay = document.getElementById("description-display");
+const temperatureDisplay = document.getElementById("temperature-display");
+const locationDisplay = document.getElementById("location-display");
 const feelsLikeDisplay = document.getElementById("feels-like-display");
 const humidityDisplay = document.getElementById("humidity-display");
 const windDisplay = document.getElementById("wind-display");
@@ -44,18 +44,21 @@ async function setWeatherData(latitude, longitude) {
   const weatherData = await response.json();
 
   const temperature = weatherData.main.temp;
-  const convertedTemperature = isFahrenheit ? `${convertToFahrenheit(temperature)} \u00b0F` : `${convertToCelcius(temperature)} \u00b0C`;
   const feelsLike = weatherData.main.feels_like;
-  const convertedfeelsLike = isFahrenheit ? `${convertToFahrenheit(feelsLike)} \u00b0F` : `${convertToCelcius(feelsLike)} \u00b0C`;
   const wind = weatherData.wind.speed;
+
+  const convertedTemperature = isFahrenheit ? `${convertToFahrenheit(temperature)} \u00b0F` : `${convertToCelcius(temperature)} \u00b0C`;
+  const convertedfeelsLike = isFahrenheit ? `${convertToFahrenheit(feelsLike)} \u00b0F` : `${convertToCelcius(feelsLike)} \u00b0C`;
   const convertedWind = isMiles ? `${convertToMiles(wind)} mph` : `${convertToKilometers(wind)} km/h`;
 
-  locationDisplay.textContent = `${weatherData.name}, ${weatherData.sys.country}`;
-  temperatureDisplay.textContent = convertedTemperature;
   descriptionDisplay.textContent = weatherData.weather[0].main;
+  temperatureDisplay.textContent = convertedTemperature;
+  locationDisplay.textContent = `${weatherData.name}, ${weatherData.sys.country}`;
   feelsLikeDisplay.textContent = `Feels Like: ${convertedfeelsLike}`;
   humidityDisplay.textContent = `Humidity: ${weatherData.main.humidity}`;
   windDisplay.textContent = convertedWind;
+
+  console.log(weatherData);
 }
 
 function convertToFahrenheit(temperature) {
