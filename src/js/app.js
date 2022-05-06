@@ -8,6 +8,7 @@ const feelsLikeDisplay = document.getElementById("feels-like-display");
 const humidityDisplay = document.getElementById("humidity-display");
 const windDisplay = document.getElementById("wind-display");
 const dateDisplay = document.getElementById("date-display");
+const timeDisplay = document.getElementById("time-display");
 const weatherImage = document.getElementById("weather-image");
 
 const locationInput = document.getElementById("location-input");
@@ -60,9 +61,9 @@ async function setWeatherData(latitude, longitude) {
   feelsLikeDisplay.textContent = `Feels Like: ${convertedfeelsLike}`;
   humidityDisplay.textContent = `Humidity: ${weatherData.main.humidity}`;
   windDisplay.textContent = convertedWind;
-
+  dateDisplay.textContent = getLocalDate(weatherData.timezone);
+  timeDisplay.textContent = getLocalTime(weatherData.timezone);
   setWeatherImage(description);
-  console.log(weatherData);
 }
 
 function setWeatherImage(description) {
@@ -72,6 +73,25 @@ function setWeatherImage(description) {
   else if (description === "Snow") weatherImage.src = require("../images/snow.png");
   else if (description === "Thunderstorm") weatherImage.src = require("../images/thunderstorm.png");
   else weatherImage.src = require("../images/atmosphere.png");
+}
+
+// Time Functions
+function getLocalDate(timezone) {
+  const localDateTime = getLocalDateTime(timezone);
+  return localDateTime.toLocaleString("en", { dateStyle: "full" });
+}
+
+function getLocalTime(timezone) {
+  const localDateTime = getLocalDateTime(timezone);
+  return localDateTime.toLocaleString("en", { timeStyle: "long" });
+}
+
+function getLocalDateTime(timezone) {
+  const date = new Date();
+  const time = date.getTime();
+  const utc = time + date.getTimezoneOffset() * 60000;
+  const localTime = utc + timezone * 1000;
+  return new Date(localTime);
 }
 
 // Conversion Functions
