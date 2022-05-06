@@ -5,11 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="shortcut icon" href="#" />
+    <link rel="shortcut icon" href="../node_modules/bootstrap-icons/icons/cloud-sun.svg" />
     <link rel="stylesheet" href="./scss/app.scss" />
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAj4LXk8fF6kUD-NIYGAHdqdodTYslPAV4&libraries=places" defer></script>
     <script type="module" src="./js/app.js" defer></script>
 
     <title>Forecast</title>
   </head>
-  <body></body>
+  <body class="d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card" style="width: 500px">
+      <div class="card-body">
+        <h5 class="card-title" id="location">Location Here</h5>
+        <p class="card-text" id="date-time">Current date and time here.</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" id="temperature">Temperature</li>
+        <li class="list-group-item" id="description">Description</li>
+        <li class="list-group-item" id="info">Other Info</li>
+        <li class="list-group-item">
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-slash-square"></i></span>
+            <input type="text" class="form-control" id="search" placeholder="Enter location here." />
+          </div>
+        </li>
+      </ul>
+    </div>
+  </body>
 </html>
