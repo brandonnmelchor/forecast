@@ -8,6 +8,7 @@ const feelsLikeDisplay = document.getElementById("feels-like-display");
 const humidityDisplay = document.getElementById("humidity-display");
 const windDisplay = document.getElementById("wind-display");
 const dateDisplay = document.getElementById("date-display");
+const weatherImage = document.getElementById("weather-image");
 
 const locationInput = document.getElementById("location-input");
 const locationSearch = new google.maps.places.SearchBox(locationInput);
@@ -43,6 +44,7 @@ async function setWeatherData(latitude, longitude) {
   const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&&appid=${openWeatherAPI}`);
   const weatherData = await response.json();
 
+  const description = weatherData.weather[0].main;
   const temperature = weatherData.main.temp;
   const feelsLike = weatherData.main.feels_like;
   const wind = weatherData.wind.speed;
@@ -51,7 +53,7 @@ async function setWeatherData(latitude, longitude) {
   const convertedfeelsLike = isFahrenheit ? `${convertToFahrenheit(feelsLike)} \u00b0F` : `${convertToCelcius(feelsLike)} \u00b0C`;
   const convertedWind = isMiles ? `${convertToMiles(wind)} mph` : `${convertToKilometers(wind)} km/h`;
 
-  descriptionDisplay.textContent = weatherData.weather[0].main;
+  descriptionDisplay.textContent = description;
   temperatureDisplay.textContent = convertedTemperature;
   locationDisplay.textContent = `${weatherData.name}, ${weatherData.sys.country}`;
   feelsLikeDisplay.textContent = `Feels Like: ${convertedfeelsLike}`;
@@ -79,3 +81,11 @@ function convertToKilometers(wind) {
 
 // On Page Load
 updateUsingGeolocation();
+
+// Work in Progress
+function setWeatherImage(description) {
+  if (description === "Clear") return;
+}
+
+weatherImage.src = "./images/rain.png";
+console.log(weatherImage);
