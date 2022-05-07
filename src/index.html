@@ -17,6 +17,10 @@
     <div class="container-lg d-flex justify-content-center align-items-center">
       <div class="card w-75 row justify-content-center align-items-center shadow py-5">
         <div class="row justify-content-center gap-3 mb-3">
+          <div class="col-7">
+            <img class="img-fluid rounded" id="weather-image" src="./images/placeholder.png" />
+          </div>
+
           <div class="col-4">
             <span class="fs-1 fw-bold me-1" id="description-icon-display"></span>
             <div class="fs-1 fw-bold d-inline" id="description-display">NA</div>
@@ -47,21 +51,17 @@
               </div>
             </div>
           </div>
-
-          <div class="col-7">
-            <img class="img-fluid rounded" id="weather-image" src="./images/placeholder.png" />
-          </div>
         </div>
 
         <div class="row justify-content-center align-items-center gap-3">
-          <div class="col-4">
+          <div class="col-7">
             <span class="fs-3 fw-bold me-1"><i class="bi bi-building"></i></span>
-            <div class="fs-3 fw-bold mb-2 d-inline" id="location-display"></div>
-            <div class="fs-6 mb-2" id="date-display"></div>
+            <div class="fs-3 fw-bold d-inline" id="location-display"></div>
+            <div class="fs-6 mt-2 mb-1" id="date-display"></div>
             <div class="fs-6" id="time-display"></div>
           </div>
 
-          <div class="col-7">
+          <div class="col-4">
             <input type="text" class="form-control mb-3" id="location-input" placeholder="Search Location" />
 
             <div class="row align-items-center gap-3">
