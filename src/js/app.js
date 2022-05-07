@@ -2,6 +2,7 @@ import * as bootstrap from "bootstrap";
 
 // Variables
 const descriptionDisplay = document.getElementById("description-display");
+const descriptionIconDisplay = document.getElementById("description-icon-display");
 const temperatureDisplay = document.getElementById("temperature-display");
 
 const feelsLikeDisplay = document.getElementById("feels-like-display");
@@ -65,7 +66,8 @@ async function setWeatherData(latitude, longitude) {
   const convertedfeelsLike = isFahrenheit ? `${convertToFahrenheit(feelsLike)} \u00b0F` : `${convertToCelcius(feelsLike)} \u00b0C`;
   const convertedWind = isMiles ? `${convertToMiles(wind)} mph` : `${convertToKilometers(wind)} km/h`;
 
-  descriptionDisplay.innerHTML = `${descriptionIcon} ${description}`;
+  descriptionDisplay.textContent = description;
+  descriptionIconDisplay.innerHTML = descriptionIcon;
   temperatureDisplay.textContent = convertedTemperature;
   feelsLikeDisplay.textContent = convertedfeelsLike;
   humidityDisplay.textContent = `${weatherData.main.humidity} %`;
