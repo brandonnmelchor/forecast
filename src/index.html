@@ -17,11 +17,11 @@
     <div class="container-lg d-flex justify-content-center align-items-center">
       <div class="card w-75 row justify-content-center align-items-center shadow py-5">
         <div class="row justify-content-center align-items-center gap-3 mb-4">
-          <div class="col-10 col-md-7">
+          <div class="col-12 col-sm-10 col-md-7">
             <img class="img-fluid rounded" id="weather-image" src="./images/placeholder.png" />
           </div>
 
-          <div class="col-10 col-md-4 mt-2 mt-md-0">
+          <div class="col-12 col-sm-10 col-md-4 mt-2 mt-md-0">
             <span class="fs-1 fw-bold me-1" id="description-icon-display"></span>
             <div class="fs-1 fw-bold d-inline" id="description-display">NA</div>
             <div class="fs-1 fw-bold" id="temperature-display"></div>
@@ -56,14 +56,14 @@
         <hr class="w-75" />
 
         <div class="row justify-content-center align-items-center gap-3">
-          <div class="col-10 col-md-7">
-            <span class="fs-3 me-1"><i class="bi bi-building"></i></span>
+          <div class="col-12 col-sm-10 col-md-7">
+            <span class="fs-3 d-none d-sm-inline me-1"><i class="bi bi-building"></i></span>
             <div class="fs-3 fw-bold d-inline" id="location-display"></div>
             <div class="fs-6 mt-2 mb-1" id="date-display"></div>
             <div class="fs-6" id="time-display"></div>
           </div>
 
-          <div class="col-10 col-md-4 mt-2 mt-md-0">
+          <div class="col-12 col-sm-10 col-md-4 mt-2 mt-md-0">
             <input type="text" class="form-control mb-2" id="location-input" placeholder="Search Location" />
 
             <div class="row row-cols-1 row-cols-xl-2 align-items-center">
@@ -74,7 +74,7 @@
                 </div>
               </div>
 
-              <div class="col">
+              <div class="col d-none d-md-block">
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" role="switch" id="measurement-toggle" checked />
                   <label class="form-check-label" id="measurement-toggle-label" for="measurement-toggle">Miles</label>
