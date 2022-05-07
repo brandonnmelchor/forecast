@@ -47,6 +47,7 @@ async function setWeatherData(latitude, longitude) {
   const weatherData = await response.json();
 
   const description = weatherData.weather[0].main;
+  const descriptionIcon = setWeatherIcon(description);
   const temperature = weatherData.main.temp;
   const feelsLike = weatherData.main.feels_like;
   const wind = weatherData.wind.speed;
@@ -55,7 +56,7 @@ async function setWeatherData(latitude, longitude) {
   const convertedfeelsLike = isFahrenheit ? `${convertToFahrenheit(feelsLike)} \u00b0F` : `${convertToCelcius(feelsLike)} \u00b0C`;
   const convertedWind = isMiles ? `${convertToMiles(wind)} mph` : `${convertToKilometers(wind)} km/h`;
 
-  descriptionDisplay.innerHTML = `${description}`;
+  descriptionDisplay.innerHTML = `${descriptionIcon} ${description}`;
   temperatureDisplay.textContent = convertedTemperature;
   locationDisplay.innerHTML = `<i class="bi bi-building"></i> ${weatherData.name}, ${weatherData.sys.country}`;
   feelsLikeDisplay.textContent = convertedfeelsLike;
@@ -76,14 +77,14 @@ function setWeatherImage(description) {
   else weatherImage.src = require("../images/atmosphere.png");
 }
 
-// function setWeatherIcon(description) {
-//   if (description === "Clear") weatherImage.src = require("../images/clear.png");
-//   else if (description === "Clouds") weatherImage.src = require("../images/clouds.png");
-//   else if (description === "Rain" || description === "Drizzle") weatherImage.src = require("../images/rain.png");
-//   else if (description === "Snow") weatherImage.src = require("../images/snow.png");
-//   else if (description === "Thunderstorm") weatherImage.src = require("../images/thunderstorm.png");
-//   else weatherImage.src = require("../images/atmosphere.png");
-// }
+function setWeatherIcon(description) {
+  if (description === "Clear") return `<i class="bi bi-sun"></i>`;
+  else if (description === "Clouds") return `<i class="bi bi-clouds"></i>`;
+  else if (description === "Rain" || description === "Drizzle") return `<i class="bi bi-cloud-rain"></i>`;
+  else if (description === "Snow") return `<i class="bi bi-cloud-snow"></i>`;
+  else if (description === "Thunderstorm") return `<i class="bi bi-cloud-lightning"></i>`;
+  else return `<i class="bi bi-cloud-haze2"></i>`;
+}
 
 // Time Functions
 function getLocalDate(timezone) {
