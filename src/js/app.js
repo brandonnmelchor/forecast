@@ -72,7 +72,7 @@ async function setWeatherData(latitude, longitude) {
   feelsLikeDisplay.textContent = convertedfeelsLike;
   humidityDisplay.textContent = `${weatherData.main.humidity} %`;
   windDisplay.textContent = convertedWind;
-  locationDisplay.innerHTML = `<i class="bi bi-building"></i> ${weatherData.name}, ${weatherData.sys.country}`;
+  locationDisplay.innerHTML = `${weatherData.name}, ${weatherData.sys.country}`;
   dateDisplay.textContent = getLocalDate(weatherData.timezone);
   timeDisplay.textContent = getLocalTime(weatherData.timezone);
 
