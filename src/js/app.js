@@ -21,6 +21,8 @@ let longitude;
 
 const temperatureToggle = document.getElementById("temperature-toggle");
 const measurementToggle = document.getElementById("measurement-toggle");
+const temperatureToggleLabel = document.getElementById("temperature-toggle-label");
+const measurementToggleLabel = document.getElementById("measurement-toggle-label");
 let isFahrenheit = true;
 let isMiles = true;
 
@@ -118,11 +120,13 @@ measurementToggle.addEventListener("change", setMeasurementUnit);
 
 function setTemperatureUnit() {
   isFahrenheit = temperatureToggle.checked;
+  temperatureToggleLabel.textContent = isFahrenheit ? "Fahrenheit" : "Celsius";
   setWeatherData(latitude, longitude).catch((error) => alert(error));
 }
 
 function setMeasurementUnit() {
   isMiles = measurementToggle.checked;
+  measurementToggleLabel.textContent = isMiles ? "Miles" : "Kilometers";
   setWeatherData(latitude, longitude).catch((error) => alert(error));
 }
 

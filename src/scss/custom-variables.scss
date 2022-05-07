@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 $primary: #30475E;
+$black: $primary;
+$dark: $primary;
+
 $font-family-sans-serif: 'Roboto';
 
 // * {
@@ -9,6 +12,14 @@ $font-family-sans-serif: 'Roboto';
 
 $card-border-color: rgba($primary, .125);
 $body-color: $primary;
+
+$form-check-input-bg: $primary;
+$form-check-input-border: 1px solid rgba($black, .25);
+
+#temperature-toggle,
+#measurement-toggle {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='white'/></svg>");
+}
 
 .weather-icon {
   font-size: 40px;
