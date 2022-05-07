@@ -3,17 +3,24 @@ import * as bootstrap from "bootstrap";
 // Variables
 const descriptionDisplay = document.getElementById("description-display");
 const temperatureDisplay = document.getElementById("temperature-display");
-const locationDisplay = document.getElementById("location-display");
+
 const feelsLikeDisplay = document.getElementById("feels-like-display");
 const humidityDisplay = document.getElementById("humidity-display");
 const windDisplay = document.getElementById("wind-display");
+
+const locationDisplay = document.getElementById("location-display");
 const dateDisplay = document.getElementById("date-display");
 const timeDisplay = document.getElementById("time-display");
+
 const weatherImage = document.getElementById("weather-image");
 
 const locationInput = document.getElementById("location-input");
 const locationSearch = new google.maps.places.SearchBox(locationInput);
+let latitude;
+let longitude;
 
+const temperatureToggle = document.getElementById("temperature-toggle");
+const measurementToggle = document.getElementById("measurement-toggle");
 let isFahrenheit = true;
 let isMiles = true;
 
@@ -25,8 +32,8 @@ locationSearch.addListener("places_changed", () => {
   const location = locationSearch.getPlaces()[0];
   if (location === null) return;
 
-  const latitude = location.geometry.location.lat();
-  const longitude = location.geometry.location.lng();
+  latitude = location.geometry.location.lat();
+  longitude = location.geometry.location.lng();
 
   setWeatherData(latitude, longitude).catch((error) => alert(error));
 });
@@ -34,8 +41,8 @@ locationSearch.addListener("places_changed", () => {
 function updateUsingGeolocation() {
   navigator.geolocation.getCurrentPosition((location) => {
     if (location === null) return;
-    const latitude = location.coords.latitude;
-    const longitude = location.coords.longitude;
+    latitude = location.coords.latitude;
+    longitude = location.coords.longitude;
 
     setWeatherData(latitude, longitude).catch((error) => alert(error));
   });
@@ -58,10 +65,10 @@ async function setWeatherData(latitude, longitude) {
 
   descriptionDisplay.innerHTML = `${descriptionIcon} ${description}`;
   temperatureDisplay.textContent = convertedTemperature;
-  locationDisplay.innerHTML = `<i class="bi bi-building"></i> ${weatherData.name}, ${weatherData.sys.country}`;
   feelsLikeDisplay.textContent = convertedfeelsLike;
   humidityDisplay.textContent = `${weatherData.main.humidity} %`;
   windDisplay.textContent = convertedWind;
+  locationDisplay.innerHTML = `<i class="bi bi-building"></i> ${weatherData.name}, ${weatherData.sys.country}`;
   dateDisplay.textContent = getLocalDate(weatherData.timezone);
   timeDisplay.textContent = getLocalTime(weatherData.timezone);
 
@@ -105,6 +112,20 @@ function getLocalDateTime(timezone) {
   return new Date(localTime);
 }
 
+// Unit Functions
+temperatureToggle.addEventListener("change", setTemperatureUnit);
+measurementToggle.addEventListener("change", setMeasurementUnit);
+
+function setTemperatureUnit() {
+  isFahrenheit = temperatureToggle.checked;
+  setWeatherData(latitude, longitude).catch((error) => alert(error));
+}
+
+function setMeasurementUnit() {
+  isMiles = measurementToggle.checked;
+  setWeatherData(latitude, longitude).catch((error) => alert(error));
+}
+
 // Conversion Functions
 function convertToFahrenheit(temperature) {
   return Math.round((temperature - 273.15) * (9 / 5) + 32);
@@ -124,3 +145,5 @@ function convertToKilometers(wind) {
 
 // On Page Load
 updateUsingGeolocation();
+
+// Work in Progress
