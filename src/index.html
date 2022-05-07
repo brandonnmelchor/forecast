@@ -13,27 +13,73 @@
 
     <title>Forecast</title>
   </head>
-  <body class="d-flex justify-content-center align-items-center min-vh-100">
-    <div class="container-lg">
-      <div class="row justify-content-center align-items-center gap-5">
-        <div class="col-5">
-          <h1>
-            <div class="display-4 mb-3" id="description-display">Description</div>
-            <div class="display-5" id="temperature-display">Temperature</div>
-          </h1>
+  <body class="d-flex justify-content-center align-items-center min-vh-100 bg-secondary">
+    <div class="container-lg d-flex justify-content-center align-items-center">
+      <div class="card w-75 row justify-content-center align-items-center py-3">
+        <div class="row justify-content-center align-items-center gap-3 mb-3">
+          <div class="col-4">
+            <div class="fs-1 fw-bold" id="description-display">Description</div>
+            <div class="fs-1 fw-bold" id="temperature-display">Temperature</div>
+            <hr />
 
-          <p id="location-display">Location</p>
-          <p id="feels-like-display">Feels Like</p>
-          <p id="humidity-display">Humidity</p>
-          <p id="wind-display">Wind Speed</p>
-          <p id="date-display">Date</p>
-          <p id="time-display">Time</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="weather-icon"><i class="bi bi-thermometer-half"></i></span>
+              <div class="ms-3">
+                <div class="fs-6 mb-1">Feels Like</div>
+                <div class="fs-4 fw-bold" id="feels-like-display"><i class="bi bi-cloud-haze2"></i></div>
+              </div>
+            </div>
 
-          <input type="text" class="form-control" id="location-input" placeholder="Enter location here." />
+            <div class="d-flex align-items-center mb-2">
+              <span class="weather-icon"><i class="bi bi-droplet-half"></i></span>
+              <div class="ms-3">
+                <div class="fs-6 mb-1">Humidity</div>
+                <div class="fs-4 fw-bold" id="humidity-display"><i class="bi bi-cloud-haze2"></i></div>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center">
+              <span class="weather-icon"><i class="bi bi-wind"></i></span>
+              <div class="ms-3">
+                <div class="fs-6 mb-1">Wind Speed</div>
+                <div class="fs-4 fw-bold" id="wind-display"><i class="bi bi-cloud-haze2"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <img class="img-fluid rounded" id="weather-image" src="./images/placeholder.png" />
+          </div>
         </div>
 
-        <div class="col-5">
-          <img class="img-fluid rounded" id="weather-image" src="./images/placeholder.png" />
+        <hr class="w-75" />
+
+        <div class="row justify-content-center align-items-center gap-3">
+          <div class="col-4">
+            <div class="fs-3 mb-2" id="location-display">Location</div>
+            <div class="fs-6 mb-2" id="date-display">Date</div>
+            <div class="fs-6" id="time-display">Time</div>
+          </div>
+
+          <div class="col-6">
+            <input type="text" class="form-control mb-3" id="location-input" placeholder="Enter location here." />
+
+            <div class="row align-items-center gap-3">
+              <div class="col-5">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="temperature-toggle" checked />
+                  <label class="form-check-label" for="temperature-toggle">Fahrenheit</label>
+                </div>
+              </div>
+
+              <div class="col-5">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="temperature-toggle" checked />
+                  <label class="form-check-label" for="temperature-toggle">Miles</label>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
