@@ -3,13 +3,13 @@
 $primary: #30475E;
 $font-family-sans-serif: 'Roboto';
 
-* {
-  border: 1px solid gray;
-}
+// * {
+//   border: 1px solid gray;
+// }
 
 $card-border-color: rgba($primary, .125);
 $body-color: $primary;
 
 .weather-icon {
-  font-size: 50px;
+  font-size: 40px;
 }

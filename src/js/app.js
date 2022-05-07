@@ -55,7 +55,7 @@ async function setWeatherData(latitude, longitude) {
   const convertedfeelsLike = isFahrenheit ? `${convertToFahrenheit(feelsLike)} \u00b0F` : `${convertToCelcius(feelsLike)} \u00b0C`;
   const convertedWind = isMiles ? `${convertToMiles(wind)} mph` : `${convertToKilometers(wind)} km/h`;
 
-  descriptionDisplay.textContent = description;
+  descriptionDisplay.innerHTML = `${description}`;
   temperatureDisplay.textContent = convertedTemperature;
   locationDisplay.innerHTML = `<i class="bi bi-building"></i> ${weatherData.name}, ${weatherData.sys.country}`;
   feelsLikeDisplay.textContent = convertedfeelsLike;
@@ -75,6 +75,15 @@ function setWeatherImage(description) {
   else if (description === "Thunderstorm") weatherImage.src = require("../images/thunderstorm.png");
   else weatherImage.src = require("../images/atmosphere.png");
 }
+
+// function setWeatherIcon(description) {
+//   if (description === "Clear") weatherImage.src = require("../images/clear.png");
+//   else if (description === "Clouds") weatherImage.src = require("../images/clouds.png");
+//   else if (description === "Rain" || description === "Drizzle") weatherImage.src = require("../images/rain.png");
+//   else if (description === "Snow") weatherImage.src = require("../images/snow.png");
+//   else if (description === "Thunderstorm") weatherImage.src = require("../images/thunderstorm.png");
+//   else weatherImage.src = require("../images/atmosphere.png");
+// }
 
 // Time Functions
 function getLocalDate(timezone) {
