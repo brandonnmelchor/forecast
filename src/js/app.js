@@ -66,7 +66,7 @@ async function setWeatherData(latitude, longitude) {
   const convertedfeelsLike = isFahrenheit ? `${convertToFahrenheit(feelsLike)} \u00b0F` : `${convertToCelcius(feelsLike)} \u00b0C`;
   const convertedWind = isMiles ? `${convertToMiles(wind)} mph` : `${convertToKilometers(wind)} km/h`;
 
-  descriptionDisplay.textContent = description;
+  descriptionDisplay.textContent = description === "Thunderstorm" ? "Storm" : description;
   descriptionIconDisplay.innerHTML = descriptionIcon;
   temperatureDisplay.textContent = convertedTemperature;
   feelsLikeDisplay.textContent = convertedfeelsLike;
