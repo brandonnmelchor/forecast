@@ -80,6 +80,7 @@ async function setWeatherData(latitude, longitude, locationAlt) {
   timeDisplay.textContent = getTime(weatherData.timezone);
 
   setWeatherImage(description);
+  setWeatherBackground(description);
 }
 
 function setWeatherIcon(description) {
@@ -98,6 +99,15 @@ function setWeatherImage(description) {
   else if (description === "Snow") weatherImage.src = require("../images/snow.png");
   else if (description === "Thunderstorm") weatherImage.src = require("../images/thunderstorm.png");
   else weatherImage.src = require("../images/atmosphere.png");
+}
+
+function setWeatherBackground(description) {
+  if (description === "Clear") document.body.setAttribute("id", "clear");
+  else if (description === "Clouds") document.body.setAttribute("id", "clouds");
+  else if (description === "Rain" || description === "Drizzle") document.body.setAttribute("id", "rain");
+  else if (description === "Snow") document.body.setAttribute("id", "snow");
+  else if (description === "Thunderstorm") document.body.setAttribute("id", "thunderstorm");
+  else document.body.setAttribute("id", "atmosphere");
 }
 
 // Time Functions
