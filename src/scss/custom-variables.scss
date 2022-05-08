@@ -21,6 +21,12 @@ $form-check-input-border: 1px solid rgba($black, .25);
   font-size: 40px;
 }
 
+@media (max-width: 991px) {
+  .weather-icon {
+    font-size: 30px;
+  }
+}
+
 // * {
 //   border: 1px solid gray;
 // }
