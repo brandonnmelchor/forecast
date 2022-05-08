@@ -76,10 +76,8 @@ async function setWeatherData(latitude, longitude, locationAlt) {
   humidityDisplay.textContent = `${weatherData.main.humidity} %`;
   windDisplay.textContent = convertedWind;
   locationDisplay.innerHTML = location;
-  dateTimeDisplay.textContent = getDateTime(weatherData.timezone);
-  dateDisplay.textContent = getDate(weatherData.timezone);
-  timeDisplay.textContent = getTime(weatherData.timezone);
 
+  setDateTime(weatherData.timezone);
   setWeatherImage(description);
   setWeatherBackground(description);
 
@@ -116,22 +114,17 @@ function setWeatherBackground(description) {
 }
 
 // Time Functions
+function setDateTime(timezone) {
+  dateTimeDisplay.textContent = getDateTime(timezone).toLocaleString("en", { dateStyle: "long", timeStyle: "short" });
+  dateDisplay.textContent = getDateTime(timezone).toLocaleString("en", { dateStyle: "full" });
+  timeDisplay.textContent = getDateTime(timezone).toLocaleString("en", { timeStyle: "medium" });
+
+  setTimeout(() => {
+    setDateTime(timezone);
+  }, 1000);
+}
+
 function getDateTime(timezone) {
-  const localDateTime = getLocalDateTime(timezone);
-  return localDateTime.toLocaleString("en", { dateStyle: "long", timeStyle: "short" });
-}
-
-function getDate(timezone) {
-  const localDateTime = getLocalDateTime(timezone);
-  return localDateTime.toLocaleString("en", { dateStyle: "full" });
-}
-
-function getTime(timezone) {
-  const localDateTime = getLocalDateTime(timezone);
-  return localDateTime.toLocaleString("en", { timeStyle: "medium" });
-}
-
-function getLocalDateTime(timezone) {
   const date = new Date();
   const time = date.getTime();
   const utc = time + date.getTimezoneOffset() * 60000;
