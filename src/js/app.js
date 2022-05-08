@@ -170,5 +170,3 @@ function convertToKilometers(wind) {
 // On Page Load
 setWeatherData(latitude, longitude);
 updateUsingGeolocation();
-
-// Work in Progress
