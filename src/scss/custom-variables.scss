@@ -21,6 +21,48 @@ $form-check-input-border: 1px solid rgba($black, .25);
   font-size: 40px;
 }
 
+.clear {
+  background: #FAFAFA;
+  background: -webkit-linear-gradient(bottom, #FAFAFA, #CEEAF1);
+  background: -moz-linear-gradient(bottom, #FAFAFA, #CEEAF1);
+  background: linear-gradient(to top, #FAFAFA, #CEEAF1);
+}
+
+.clouds {
+  background: #BCC0C2;
+  background: -webkit-linear-gradient(top left, #BCC0C2, #476172);
+  background: -moz-linear-gradient(top left, #BCC0C2, #476172);
+  background: linear-gradient(to bottom right, #BCC0C2, #476172);
+}
+
+.rain {
+  background: #A0BDC2;
+  background: -webkit-linear-gradient(top right, #A0BDC2, #F2F2F2);
+  background: -moz-linear-gradient(top right, #A0BDC2, #F2F2F2);
+  background: linear-gradient(to bottom left, #A0BDC2, #F2F2F2);
+}
+
+.snow {
+  background: #F7F7F7;
+  background: -webkit-linear-gradient(bottom, #F7F7F7, #E0E6EB);
+  background: -moz-linear-gradient(bottom, #F7F7F7, #E0E6EB);
+  background: linear-gradient(to top, #F7F7F7, #E0E6EB);
+}
+
+.thunderstorm {
+  background: #A1A7AA;
+  background: -webkit-linear-gradient(bottom left, #A1A7AA, #3D505C);
+  background: -moz-linear-gradient(bottom left, #A1A7AA, #3D505C);
+  background: linear-gradient(to top right, #A1A7AA, #3D505C);
+}
+
+.atmosphere {
+  background: #F7F7F7;
+  background: -webkit-linear-gradient(top, #F7F7F7, #E0E6EB);
+  background: -moz-linear-gradient(top, #F7F7F7, #E0E6EB);
+  background: linear-gradient(to bottom, #F7F7F7, #E0E6EB);
+}
+
 @media (max-width: 991px) {
   .weather-icon {
     font-size: 30px;
