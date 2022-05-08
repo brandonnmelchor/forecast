@@ -17,8 +17,8 @@ const timeDisplay = document.getElementById("time-display");
 
 const locationInput = document.getElementById("location-input");
 const locationSearch = new google.maps.places.SearchBox(locationInput);
-let latitude;
-let longitude;
+let latitude = 30.267153;
+let longitude = -97.7430608;
 
 const temperatureToggle = document.getElementById("temperature-toggle");
 const measurementToggle = document.getElementById("measurement-toggle");
@@ -149,6 +149,7 @@ function convertToKilometers(wind) {
 }
 
 // On Page Load
+setWeatherData(latitude, longitude);
 updateUsingGeolocation();
 
 // Work in Progress
