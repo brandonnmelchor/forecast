@@ -12,6 +12,7 @@ const humidityDisplay = document.getElementById("humidity-display");
 const windDisplay = document.getElementById("wind-display");
 
 const locationDisplay = document.getElementById("location-display");
+const dateTimeDisplay = document.getElementById("date-time-display");
 const dateDisplay = document.getElementById("date-display");
 const timeDisplay = document.getElementById("time-display");
 
@@ -72,8 +73,9 @@ async function setWeatherData(latitude, longitude) {
   humidityDisplay.textContent = `${weatherData.main.humidity} %`;
   windDisplay.textContent = convertedWind;
   locationDisplay.innerHTML = `${weatherData.name}, ${weatherData.sys.country}`;
-  dateDisplay.textContent = getLocalDate(weatherData.timezone);
-  timeDisplay.textContent = getLocalTime(weatherData.timezone);
+  dateTimeDisplay.textContent = getDateTime(weatherData.timezone);
+  dateDisplay.textContent = getDate(weatherData.timezone);
+  timeDisplay.textContent = getTime(weatherData.timezone);
 
   setWeatherImage(description);
 }
@@ -97,12 +99,17 @@ function setWeatherImage(description) {
 }
 
 // Time Functions
-function getLocalDate(timezone) {
+function getDateTime(timezone) {
+  const localDateTime = getLocalDateTime(timezone);
+  return localDateTime.toLocaleString("en", { dateStyle: "long", timeStyle: "short" });
+}
+
+function getDate(timezone) {
   const localDateTime = getLocalDateTime(timezone);
   return localDateTime.toLocaleString("en", { dateStyle: "full" });
 }
 
-function getLocalTime(timezone) {
+function getTime(timezone) {
   const localDateTime = getLocalDateTime(timezone);
   return localDateTime.toLocaleString("en", { timeStyle: "medium" });
 }
