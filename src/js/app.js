@@ -1,8 +1,10 @@
 import * as bootstrap from "bootstrap";
 
 // Variables
-const descriptionDisplay = document.getElementById("description-display");
+const weatherImage = document.getElementById("weather-image");
+
 const descriptionIconDisplay = document.getElementById("description-icon-display");
+const descriptionDisplay = document.getElementById("description-display");
 const temperatureDisplay = document.getElementById("temperature-display");
 
 const feelsLikeDisplay = document.getElementById("feels-like-display");
@@ -12,8 +14,6 @@ const windDisplay = document.getElementById("wind-display");
 const locationDisplay = document.getElementById("location-display");
 const dateDisplay = document.getElementById("date-display");
 const timeDisplay = document.getElementById("time-display");
-
-const weatherImage = document.getElementById("weather-image");
 
 const locationInput = document.getElementById("location-input");
 const locationSearch = new google.maps.places.SearchBox(locationInput);
@@ -38,7 +38,7 @@ locationSearch.addListener("places_changed", () => {
   latitude = location.geometry.location.lat();
   longitude = location.geometry.location.lng();
 
-  setWeatherData(latitude, longitude).catch((error) => alert(error));
+  setWeatherData(latitude, longitude);
 });
 
 function updateUsingGeolocation() {
@@ -47,7 +47,7 @@ function updateUsingGeolocation() {
     latitude = location.coords.latitude;
     longitude = location.coords.longitude;
 
-    setWeatherData(latitude, longitude).catch((error) => alert(error));
+    setWeatherData(latitude, longitude);
   });
 }
 
@@ -57,7 +57,6 @@ async function setWeatherData(latitude, longitude) {
   const weatherData = await response.json();
 
   const description = weatherData.weather[0].main;
-  const descriptionIcon = setWeatherIcon(description);
   const temperature = weatherData.main.temp;
   const feelsLike = weatherData.main.feels_like;
   const wind = weatherData.wind.speed;
@@ -66,8 +65,8 @@ async function setWeatherData(latitude, longitude) {
   const convertedfeelsLike = isFahrenheit ? `${convertToFahrenheit(feelsLike)} \u00b0F` : `${convertToCelcius(feelsLike)} \u00b0C`;
   const convertedWind = isMiles ? `${convertToMiles(wind)} mph` : `${convertToKilometers(wind)} km/h`;
 
+  descriptionIconDisplay.innerHTML = setWeatherIcon(description);
   descriptionDisplay.textContent = description === "Thunderstorm" ? "Storm" : description;
-  descriptionIconDisplay.innerHTML = descriptionIcon;
   temperatureDisplay.textContent = convertedTemperature;
   feelsLikeDisplay.textContent = convertedfeelsLike;
   humidityDisplay.textContent = `${weatherData.main.humidity} %`;
@@ -79,15 +78,6 @@ async function setWeatherData(latitude, longitude) {
   setWeatherImage(description);
 }
 
-function setWeatherImage(description) {
-  if (description === "Clear") weatherImage.src = require("../images/clear.png");
-  else if (description === "Clouds") weatherImage.src = require("../images/clouds.png");
-  else if (description === "Rain" || description === "Drizzle") weatherImage.src = require("../images/rain.png");
-  else if (description === "Snow") weatherImage.src = require("../images/snow.png");
-  else if (description === "Thunderstorm") weatherImage.src = require("../images/thunderstorm.png");
-  else weatherImage.src = require("../images/atmosphere.png");
-}
-
 function setWeatherIcon(description) {
   if (description === "Clear") return `<i class="bi bi-sun"></i>`;
   else if (description === "Clouds") return `<i class="bi bi-clouds"></i>`;
@@ -95,6 +85,15 @@ function setWeatherIcon(description) {
   else if (description === "Snow") return `<i class="bi bi-cloud-snow"></i>`;
   else if (description === "Thunderstorm") return `<i class="bi bi-cloud-lightning"></i>`;
   else return `<i class="bi bi-cloud-haze2"></i>`;
+}
+
+function setWeatherImage(description) {
+  if (description === "Clear") weatherImage.src = require("../images/clear.png");
+  else if (description === "Clouds") weatherImage.src = require("../images/clouds.png");
+  else if (description === "Rain" || description === "Drizzle") weatherImage.src = require("../images/rain.png");
+  else if (description === "Snow") weatherImage.src = require("../images/snow.png");
+  else if (description === "Thunderstorm") weatherImage.src = require("../images/thunderstorm.png");
+  else weatherImage.src = require("../images/atmosphere.png");
 }
 
 // Time Functions
@@ -123,13 +122,13 @@ measurementToggle.addEventListener("change", setMeasurementUnit);
 function setTemperatureUnit() {
   isFahrenheit = temperatureToggle.checked;
   temperatureToggleLabel.textContent = isFahrenheit ? "Fahrenheit" : "Celsius";
-  setWeatherData(latitude, longitude).catch((error) => alert(error));
+  setWeatherData(latitude, longitude);
 }
 
 function setMeasurementUnit() {
   isMiles = measurementToggle.checked;
   measurementToggleLabel.textContent = isMiles ? "Miles" : "Kilometers";
-  setWeatherData(latitude, longitude).catch((error) => alert(error));
+  setWeatherData(latitude, longitude);
 }
 
 // Conversion Functions
