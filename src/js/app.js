@@ -82,6 +82,10 @@ async function setWeatherData(latitude, longitude, locationAlt) {
 
   setWeatherImage(description);
   setWeatherBackground(description);
+
+  setTimeout(() => {
+    setWeatherData(latitude, longitude, locationAlt);
+  }, 300000);
 }
 
 function setWeatherIcon(description) {
