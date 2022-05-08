@@ -20,6 +20,7 @@ const locationInput = document.getElementById("location-input");
 const locationSearch = new google.maps.places.SearchBox(locationInput);
 let latitude = 30.267153;
 let longitude = -97.7430608;
+let locationAlt;
 
 const temperatureToggle = document.getElementById("temperature-toggle");
 const measurementToggle = document.getElementById("measurement-toggle");
@@ -38,7 +39,7 @@ locationSearch.addListener("places_changed", () => {
 
   latitude = location.geometry.location.lat();
   longitude = location.geometry.location.lng();
-  const locationAlt = location.formatted_address;
+  locationAlt = location.formatted_address;
 
   setWeatherData(latitude, longitude, locationAlt);
 });
@@ -141,13 +142,13 @@ measurementToggle.addEventListener("change", setMeasurementUnit);
 function setTemperatureUnit() {
   isFahrenheit = temperatureToggle.checked;
   temperatureToggleLabel.textContent = isFahrenheit ? "Fahrenheit" : "Celsius";
-  setWeatherData(latitude, longitude);
+  setWeatherData(latitude, longitude, locationAlt);
 }
 
 function setMeasurementUnit() {
   isMiles = measurementToggle.checked;
   measurementToggleLabel.textContent = isMiles ? "Miles" : "Kilometers";
-  setWeatherData(latitude, longitude);
+  setWeatherData(latitude, longitude, locationAlt);
 }
 
 // Conversion Functions
