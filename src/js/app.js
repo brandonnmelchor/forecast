@@ -81,9 +81,7 @@ async function setWeatherData(latitude, longitude, locationAlt) {
   setWeatherImage(description);
   setWeatherBackground(description);
 
-  setTimeout(() => {
-    setWeatherData(latitude, longitude, locationAlt);
-  }, 300000);
+  setTimeout(setWeatherData, 300000, latitude, longitude, locationAlt);
 }
 
 function setWeatherIcon(description) {
@@ -119,9 +117,7 @@ function setDateTime(timezone) {
   dateDisplay.textContent = getDateTime(timezone).toLocaleString("en", { dateStyle: "full" });
   timeDisplay.textContent = getDateTime(timezone).toLocaleString("en", { timeStyle: "medium" });
 
-  setTimeout(() => {
-    setDateTime(timezone);
-  }, 1000);
+  setTimeout(setDateTime, 1000, timezone);
 }
 
 function getDateTime(timezone) {
