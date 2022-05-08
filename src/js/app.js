@@ -38,8 +38,9 @@ locationSearch.addListener("places_changed", () => {
 
   latitude = location.geometry.location.lat();
   longitude = location.geometry.location.lng();
+  const locationAlt = location.formatted_address;
 
-  setWeatherData(latitude, longitude);
+  setWeatherData(latitude, longitude, locationAlt);
 });
 
 function updateUsingGeolocation() {
@@ -53,7 +54,7 @@ function updateUsingGeolocation() {
 }
 
 // Weather Functions
-async function setWeatherData(latitude, longitude) {
+async function setWeatherData(latitude, longitude, locationAlt) {
   const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&&appid=${openWeatherAPI}`);
   const weatherData = await response.json();
 
@@ -65,6 +66,7 @@ async function setWeatherData(latitude, longitude) {
   const convertedTemperature = isFahrenheit ? `${convertToFahrenheit(temperature)} \u00b0F` : `${convertToCelcius(temperature)} \u00b0C`;
   const convertedfeelsLike = isFahrenheit ? `${convertToFahrenheit(feelsLike)} \u00b0F` : `${convertToCelcius(feelsLike)} \u00b0C`;
   const convertedWind = isMiles ? `${convertToMiles(wind)} mph` : `${convertToKilometers(wind)} km/h`;
+  const location = weatherData.name ? `${weatherData.name}, ${weatherData.sys.country}` : locationAlt;
 
   descriptionIconDisplay.innerHTML = setWeatherIcon(description);
   descriptionDisplay.textContent = description === "Thunderstorm" ? "Storm" : description;
@@ -72,7 +74,7 @@ async function setWeatherData(latitude, longitude) {
   feelsLikeDisplay.textContent = convertedfeelsLike;
   humidityDisplay.textContent = `${weatherData.main.humidity} %`;
   windDisplay.textContent = convertedWind;
-  locationDisplay.innerHTML = `${weatherData.name}, ${weatherData.sys.country}`;
+  locationDisplay.innerHTML = location;
   dateTimeDisplay.textContent = getDateTime(weatherData.timezone);
   dateDisplay.textContent = getDate(weatherData.timezone);
   timeDisplay.textContent = getTime(weatherData.timezone);
