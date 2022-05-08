@@ -104,7 +104,7 @@ function getLocalDate(timezone) {
 
 function getLocalTime(timezone) {
   const localDateTime = getLocalDateTime(timezone);
-  return localDateTime.toLocaleString("en", { timeStyle: "long" });
+  return localDateTime.toLocaleString("en", { timeStyle: "medium" });
 }
 
 function getLocalDateTime(timezone) {
