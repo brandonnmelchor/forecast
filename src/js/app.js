@@ -51,7 +51,6 @@ locationSearch.addListener("places_changed", () => {
 
 function updateUsingGeolocation() {
   navigator.geolocation.getCurrentPosition((location) => {
-    if (location === null) return;
     latitude = location.coords.latitude;
     longitude = location.coords.longitude;
 
