@@ -1,4 +1,0 @@
-# forecast
-users can save locations
-users can access saved locations using a side bar
-selecting a location from the side bar will replace current display
