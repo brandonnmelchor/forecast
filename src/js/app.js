@@ -28,11 +28,10 @@ const locationSearch = new google.maps.places.SearchBox(locationInput);
 let latitude = 30.267153;
 let longitude = -97.7430608;
 let locationAlt;
+let timeoutDateTime;
 
 let isFahrenheit = true;
 let isMiles = true;
-
-let timeoutDateTime;
 
 // Public API Key
 const openWeatherAPI = "f79262b8943c9a96eeefe553bb0bdb63";
