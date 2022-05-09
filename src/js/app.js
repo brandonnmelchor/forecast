@@ -32,7 +32,7 @@ let locationAlt;
 let isFahrenheit = true;
 let isMiles = true;
 
-let setDateTimeTimeout;
+let timeoutDateTime;
 
 // Public API Key
 const openWeatherAPI = "f79262b8943c9a96eeefe553bb0bdb63";
@@ -82,12 +82,10 @@ async function setWeatherData(latitude, longitude, locationAlt) {
   windDisplay.textContent = convertedWind;
   locationDisplay.innerHTML = location;
 
-  clearTimeout(setDateTimeTimeout);
+  clearTimeout(timeoutDateTime);
   setDateTime(weatherData.timezone);
   setWeatherImage(description);
   setWeatherBackground(description);
-
-  setTimeout(setWeatherData, 300000, latitude, longitude, locationAlt);
 }
 
 function setWeatherIcon(description) {
@@ -123,7 +121,7 @@ function setDateTime(timezone) {
   dateDisplay.textContent = getDateTime(timezone).toLocaleString("en", { dateStyle: "full" });
   timeDisplay.textContent = getDateTime(timezone).toLocaleString("en", { timeStyle: "medium" });
 
-  setDateTimeTimeout = setTimeout(setDateTime, 1000, timezone);
+  timeoutDateTime = setTimeout(setDateTime, 1000, timezone);
 }
 
 function getDateTime(timezone) {
