@@ -1,6 +1,6 @@
 import * as bootstrap from "bootstrap";
 
-// Variables
+// DOM Elements
 const weatherImage = document.getElementById("weather-image");
 
 const descriptionIconDisplay = document.getElementById("description-icon-display");
@@ -17,17 +17,22 @@ const dateDisplay = document.getElementById("date-display");
 const timeDisplay = document.getElementById("time-display");
 
 const locationInput = document.getElementById("location-input");
-const locationSearch = new google.maps.places.SearchBox(locationInput);
-let latitude = 30.267153;
-let longitude = -97.7430608;
-let locationAlt;
-
 const temperatureToggle = document.getElementById("temperature-toggle");
 const measurementToggle = document.getElementById("measurement-toggle");
 const temperatureToggleLabel = document.getElementById("temperature-toggle-label");
 const measurementToggleLabel = document.getElementById("measurement-toggle-label");
+
+// Variables
+const locationSearch = new google.maps.places.SearchBox(locationInput);
+
+let latitude = 30.267153;
+let longitude = -97.7430608;
+let locationAlt;
+
 let isFahrenheit = true;
 let isMiles = true;
+
+let setDateTimeTimeout;
 
 // Public API Key
 const openWeatherAPI = "f79262b8943c9a96eeefe553bb0bdb63";
@@ -77,6 +82,7 @@ async function setWeatherData(latitude, longitude, locationAlt) {
   windDisplay.textContent = convertedWind;
   locationDisplay.innerHTML = location;
 
+  clearTimeout(setDateTimeTimeout);
   setDateTime(weatherData.timezone);
   setWeatherImage(description);
   setWeatherBackground(description);
@@ -117,7 +123,7 @@ function setDateTime(timezone) {
   dateDisplay.textContent = getDateTime(timezone).toLocaleString("en", { dateStyle: "full" });
   timeDisplay.textContent = getDateTime(timezone).toLocaleString("en", { timeStyle: "medium" });
 
-  setTimeout(setDateTime, 1000, timezone);
+  setDateTimeTimeout = setTimeout(setDateTime, 1000, timezone);
 }
 
 function getDateTime(timezone) {
